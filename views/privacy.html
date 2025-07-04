@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center mr-3">
+                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <a href="/" class="text-xl font-semibold text-gray-900 hover:text-blue-600 transition-colors">Microphone Test</a>
+                </div>
+                <nav class="hidden sm:flex space-x-8">
+                    <a href="/" class="text-gray-500 hover:text-gray-900 transition-colors">Home</a>
+                    <a href="/privacy" class="text-blue-600 font-medium">Privacy</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="bg-white rounded-2xl shadow-lg p-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-8">Privacy Policy</h1>
+            
+            <div class="prose prose-lg max-w-none">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">Your Privacy is Our Priority</h2>
+                <p class="text-gray-700 mb-6">
+                    This microphone test application is designed with privacy in mind. We want you to know exactly how your data is handled when you use our service.
+                </p>
+
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">What We Do</h3>
+                <ul class="list-disc pl-6 text-gray-700 mb-6 space-y-2">
+                    <li>Process your microphone audio locally in your browser for real-time visualization</li>
+                    <li>Display volume levels and frequency data to help you test your microphone</li>
+                    <li>Provide a secure, client-side microphone testing experience</li>
+                </ul>
+
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">What We Don't Do</h3>
+                <ul class="list-disc pl-6 text-gray-700 mb-6 space-y-2">
+                    <li><strong>We never record your audio</strong> - Your microphone input is processed in real-time and immediately discarded</li>
+                    <li><strong>We never transmit your audio</strong> - All audio processing happens locally in your browser</li>
+                    <li><strong>We never store your audio</strong> - No audio data is saved to our servers or your device</li>
+                    <li><strong>We don't track you</strong> - We don't use analytics, cookies, or tracking scripts</li>
+                </ul>
+
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Technical Details</h3>
+                <p class="text-gray-700 mb-4">
+                    Our microphone test uses the following browser technologies:
+                </p>
+                <ul class="list-disc pl-6 text-gray-700 mb-6 space-y-2">
+                    <li><strong>getUserMedia API</strong> - To access your microphone with your permission</li>
+                    <li><strong>Web Audio API</strong> - To analyze audio frequency and volume data in real-time</li>
+                    <li><strong>Canvas/DOM</strong> - To display visual representations of your audio</li>
+                </ul>
+                <p class="text-gray-700 mb-6">
+                    All processing happens entirely within your web browser. No audio data ever leaves your device.
+                </p>
+
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Permissions</h3>
+                <p class="text-gray-700 mb-4">
+                    When you click "Start Microphone Test", your browser will ask for permission to access your microphone. This permission is:
+                </p>
+                <ul class="list-disc pl-6 text-gray-700 mb-6 space-y-2">
+                    <li>Required only for the duration of the test</li>
+                    <li>Can be revoked at any time through your browser settings</li>
+                    <li>Used solely for microphone testing and visualization</li>
+                    <li>Not used for any other purpose</li>
+                </ul>
+
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Third-Party Services</h3>
+                <p class="text-gray-700 mb-6">
+                    This application uses minimal third-party services:
+                </p>
+                <ul class="list-disc pl-6 text-gray-700 mb-6 space-y-2">
+                    <li><strong>Google Fonts</strong> - For typography (Inter font family)</li>
+                    <li><strong>Tailwind CSS CDN</strong> - For styling components</li>
+                </ul>
+                <p class="text-gray-700 mb-6">
+                    These services do not have access to your microphone or audio data.
+                </p>
+
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Data Security</h3>
+                <p class="text-gray-700 mb-6">
+                    Since no audio data is transmitted or stored, there are no data security concerns related to your microphone input. The application runs entirely in your browser using standard web technologies.
+                </p>
+
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Contact</h3>
+                <p class="text-gray-700 mb-6">
+                    If you have any questions about this privacy policy or how your data is handled, please feel free to contact us.
+                </p>
+
+                <div class="bg-green-50 border border-green-200 rounded-lg p-6 mt-8">
+                    <div class="flex items-center mb-3">
+                        <svg class="w-6 h-6 text-green-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+                        </svg>
+                        <h4 class="text-lg font-semibold text-green-800">Privacy Summary</h4>
+                    </div>
+                    <p class="text-green-800 font-medium">
+                        Your audio is never recorded, transmitted, or stored. All processing happens locally in your browser for your privacy and security.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="text-center">
+                <p class="text-gray-600 mb-4">
+                    This microphone test runs entirely in your browser. No audio data is transmitted or stored.
+                </p>
+                <div class="flex justify-center space-x-6">
+                    <a href="/privacy" class="text-gray-500 hover:text-gray-900 transition-colors">Privacy Policy</a>
+                    <span class="text-gray-300">|</span>
+                    <a href="/" class="text-gray-500 hover:text-gray-900 transition-colors">Home</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

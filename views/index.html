@@ -1,0 +1,654 @@
+<!-- Main Test Card -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 sm:p-8 mb-8">
+            <!-- Privacy Notice -->
+            <div<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <meta name="description" content="{{ description }}">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'ui-sans-serif', 'system-ui'],
+                    },
+                    fontSize: {
+                        'xs': ['0.75rem', { lineHeight: '1rem' }],
+                        'sm': ['0.875rem', { lineHeight: '1.25rem' }],
+                        'base': ['1rem', { lineHeight: '1.5rem' }],
+                        'lg': ['1.125rem', { lineHeight: '1.75rem' }],
+                        'xl': ['1.25rem', { lineHeight: '1.75rem' }],
+                        '2xl': ['1.5rem', { lineHeight: '2rem' }],
+                        '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
+                        '4xl': ['2.25rem', { lineHeight: '2.5rem' }],
+                    },
+                    screens: {
+                        'xs': '475px',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- jsPDF for certificate generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom styles -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .glass-effect { backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.9); }
+        .mic-animation { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .visualizer-bar {
+            transition: height 0.1s ease;
+            background: linear-gradient(to top, #3b82f6, #60a5fa);
+        }
+        
+        /* Responsive improvements */
+        @media (max-width: 640px) {
+            .mic-animation {
+                animation: none; /* Reduce animations on mobile for performance */
+            }
+        }
+        
+        /* FAQ specific styles */
+        #faqContainer button:hover {
+            background-color: #f9fafb;
+        }
+        
+        #faqContainer button:focus {
+            background-color: #f3f4f6;
+        }
+        
+        /* Smooth transitions for FAQ */
+        #faqContainer svg {
+            transition: transform 0.2s ease-in-out;
+        }
+        
+        /* Improve touch targets on mobile */
+        @media (max-width: 768px) {
+            #faqContainer button {
+                min-height: 60px;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center mr-3">
+                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <h1 class="text-xl font-semibold text-gray-900">Microphone Test</h1>
+                </div>
+                <nav class="hidden sm:flex space-x-8">
+                    <a href="#" class="text-gray-500 hover:text-gray-900 transition-colors">Home</a>
+                    <a href="/privacy" class="text-gray-500 hover:text-gray-900 transition-colors">Privacy</a>
+                </nav>
+                <!-- FAQ Item 7 -->
+                <div class="border border-gray-200 rounded-lg">
+                    <button class="w-full text-left p-4 sm:p-6 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset" 
+                            onclick="toggleFaq('faq7')" 
+                            aria-expanded="false" 
+                            aria-controls="faq7-content">
+                        <div class="flex justify-between items-center">
+                            <h4 class="text-base sm:text-lg font-medium text-gray-900 pr-4">What is the microphone test certificate?</h4>
+                            <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200 flex-shrink-0" 
+                                 id="faq7-icon" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                    </button>
+                    <div id="faq7-content" class="hidden px-4 sm:px-6 pb-4 sm:pb-6">
+                        <p class="text-gray-600 text-sm sm:text-base">The microphone test certificate is an official PDF document that verifies your microphone has been successfully tested and is working properly. It includes test details like date, duration, device information, and a unique certificate ID for your records.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Hero Section -->
+        <div class="text-center mb-8 sm:mb-12">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Test Your Microphone</h2>
+            <p class="text-base sm:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto px-4">
+                Check if your microphone is working properly with our real-time audio visualization. 
+                Your audio is never recorded or sent to any server.
+            </p>
+        </div>
+
+        <!-- Main Test Card -->
+        <div class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <!-- Privacy Notice -->
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-8">
+                <div class="flex items-center">
+                    <svg class="w-5 h-5 text-green-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-green-800 font-medium">Your audio is never recorded or sent to any server.</span>
+                </div>
+            </div>
+
+            <!-- Device Selector -->
+            <div class="mb-6" id="deviceSelector" style="display: none;">
+                <label for="micSelect" class="block text-sm font-medium text-gray-700 mb-2">
+                    Select Microphone Device:
+                </label>
+                <select id="micSelect" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <option value="">Loading devices...</option>
+                </select>
+            </div>
+
+            <!-- Test Controls -->
+            <div class="text-center mb-8">
+                <button id="startTest" class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-8 py-4 rounded-lg text-lg transition-colors shadow-lg hover:shadow-xl mic-animation">
+                    <svg class="w-6 h-6 inline-block mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z" clip-rule="evenodd"></path>
+                    </svg>
+                    Start Microphone Test
+                </button>
+                
+                <button id="stopTest" class="bg-red-600 hover:bg-red-700 text-white font-medium px-8 py-4 rounded-lg text-lg transition-colors shadow-lg hidden">
+                    <svg class="w-6 h-6 inline-block mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z" clip-rule="evenodd"></path>
+                    </svg>
+                    Stop Test
+                </button>
+            </div>
+
+            <!-- Status Display -->
+            <div id="statusDisplay" class="text-center mb-6">
+                <p class="text-gray-600">Click "Start Microphone Test" to begin</p>
+            </div>
+
+            <!-- Volume Meter -->
+            <div id="volumeMeter" class="hidden">
+                <div class="mb-4">
+                    <div class="flex justify-between text-sm text-gray-600 mb-2">
+                        <span>Volume Level</span>
+                        <span id="volumeValue">0%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+                        <div id="volumeBar" class="h-full bg-gradient-to-r from-green-400 via-yellow-400 to-red-500 transition-all duration-100" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Audio Visualizer -->
+            <div id="visualizer" class="hidden">
+                <h3 class="text-lg font-medium text-gray-900 mb-4 text-center">Audio Visualization</h3>
+                <div class="flex items-end justify-center space-x-1 h-32 bg-gray-50 rounded-lg p-4">
+                    <!-- Visualizer bars will be generated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Recording Player Section -->
+            <div id="recordingPlayer" class="hidden mt-8">
+                <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <svg class="w-6 h-6 text-green-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                        <h3 class="text-lg font-semibold text-green-800">Testing completed successfully!</h3>
+                    </div>
+                    
+                    <p class="text-green-700 mb-4">
+                        Your microphone works properly. You can listen to your recorded voice below. 
+                        The recording was made locally and is not stored on any server.
+                    </p>
+                    
+                    <!-- Audio Player -->
+                    <div class="bg-white rounded-lg p-4 mb-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-gray-700 font-medium">Your Recording</span>
+                            <span id="recordingDuration" class="text-gray-500 text-sm">0:00</span>
+                        </div>
+                        
+                        <audio id="recordedAudio" controls class="w-full" controlsList="nodownload">
+                            <source type="audio/webm">
+                            <source type="audio/mp4">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <button onclick="microphoneTestInstance.startNewTest()" 
+                                class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition-colors">
+                            <svg class="w-4 h-4 inline-block mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"></path>
+                            </svg>
+                            Test Again
+                        </button>
+                        
+                        <button onclick="generateCertificate()" 
+                                class="flex-1 bg-green-600 hover:bg-green-700 text-white font-medium px-4 py-2 rounded-lg transition-colors">
+                            <svg class="w-4 h-4 inline-block mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Download Certificate
+                        </button>
+                        
+                        <a id="downloadRecording" href="#" download 
+                           class="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-medium px-4 py-2 rounded-lg transition-colors text-center">
+                            <svg class="w-4 h-4 inline-block mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                            Download Recording
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error Display -->
+            <div id="errorDisplay" class="hidden bg-red-50 border border-red-200 rounded-lg p-4">
+                <div class="flex items-center">
+                    <svg class="w-5 h-5 text-red-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span id="errorMessage" class="text-red-800"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 sm:p-8 mb-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Frequently Asked Questions</h3>
+            
+            <div class="space-y-4" id="faqContainer">
+                <!-- FAQ Item 1 -->
+                <div class="border border-gray-200 rounded-lg">
+                    <button class="w-full text-left p-4 sm:p-6 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset" 
+                            onclick="toggleFaq('faq1')" 
+                            aria-expanded="false" 
+                            aria-controls="faq1-content">
+                        <div class="flex justify-between items-center">
+                            <h4 class="text-base sm:text-lg font-medium text-gray-900 pr-4">How does this microphone test work?</h4>
+                            <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200 flex-shrink-0" 
+                                 id="faq1-icon" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                    </button>
+                    <div id="faq1-content" class="hidden px-4 sm:px-6 pb-4 sm:pb-6">
+                        <p class="text-gray-600 text-sm sm:text-base">Our microphone test uses your browser's built-in Web Audio API to access your microphone and display real-time audio visualization. The test shows volume levels and frequency data to help you verify your microphone is working properly.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="border border-gray-200 rounded-lg">
+                    <button class="w-full text-left p-4 sm:p-6 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset" 
+                            onclick="toggleFaq('faq2')" 
+                            aria-expanded="false" 
+                            aria-controls="faq2-content">
+                        <div class="flex justify-between items-center">
+                            <h4 class="text-base sm:text-lg font-medium text-gray-900 pr-4">Is my audio being recorded or stored?</h4>
+                            <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200 flex-shrink-0" 
+                                 id="faq2-icon" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                    </button>
+                    <div id="faq2-content" class="hidden px-4 sm:px-6 pb-4 sm:pb-6">
+                        <p class="text-gray-600 text-sm sm:text-base">No, absolutely not. Your audio is never recorded, stored, or transmitted to any server. All processing happens locally in your browser and the audio data is immediately discarded after visualization.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="border border-gray-200 rounded-lg">
+                    <button class="w-full text-left p-4 sm:p-6 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset" 
+                            onclick="toggleFaq('faq3')" 
+                            aria-expanded="false" 
+                            aria-controls="faq3-content">
+                        <div class="flex justify-between items-center">
+                            <h4 class="text-base sm:text-lg font-medium text-gray-900 pr-4">Why is my browser asking for microphone permission?</h4>
+                            <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200 flex-shrink-0" 
+                                 id="faq3-icon" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                    </button>
+                    <div id="faq3-content" class="hidden px-4 sm:px-6 pb-4 sm:pb-6">
+                        <p class="text-gray-600 text-sm sm:text-base">Your browser requires explicit permission to access your microphone for security and privacy reasons. This permission is only used for testing your microphone and can be revoked at any time through your browser settings.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="border border-gray-200 rounded-lg">
+                    <button class="w-full text-left p-4 sm:p-6 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset" 
+                            onclick="toggleFaq('faq4')" 
+                            aria-expanded="false" 
+                            aria-controls="faq4-content">
+                        <div class="flex justify-between items-center">
+                            <h4 class="text-base sm:text-lg font-medium text-gray-900 pr-4">What should I do if my microphone isn't working?</h4>
+                            <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200 flex-shrink-0" 
+                                 id="faq4-icon" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                    </button>
+                    <div id="faq4-content" class="hidden px-4 sm:px-6 pb-4 sm:pb-6">
+                        <div class="text-gray-600 text-sm sm:text-base space-y-2">
+                            <p>Try these troubleshooting steps:</p>
+                            <ul class="list-disc list-inside space-y-1 ml-4">
+                                <li>Make sure your microphone is connected and enabled</li>
+                                <li>Check browser permissions for microphone access</li>
+                                <li>Ensure no other applications are using your microphone</li>
+                                <li>Try refreshing the page if the test doesn't work</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="border border-gray-200 rounded-lg">
+                    <button class="w-full text-left p-4 sm:p-6 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset" 
+                            onclick="toggleFaq('faq5')" 
+                            aria-expanded="false" 
+                            aria-controls="faq5-content">
+                        <div class="flex justify-between items-center">
+                            <h4 class="text-base sm:text-lg font-medium text-gray-900 pr-4">Which browsers support this microphone test?</h4>
+                            <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200 flex-shrink-0" 
+                                 id="faq5-icon" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                    </button>
+                    <div id="faq5-content" class="hidden px-4 sm:px-6 pb-4 sm:pb-6">
+                        <div class="text-gray-600 text-sm sm:text-base">
+                            <p class="mb-2">This microphone test works on all modern browsers including:</p>
+                            <ul class="list-disc list-inside space-y-1 ml-4">
+                                <li>Chrome 47+</li>
+                                <li>Firefox 36+</li>
+                                <li>Safari 11+</li>
+                                <li>Edge 79+</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 6 -->
+                <div class="border border-gray-200 rounded-lg">
+                    <button class="w-full text-left p-4 sm:p-6 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset" 
+                            onclick="toggleFaq('faq6')" 
+                            aria-expanded="false" 
+                            aria-controls="faq6-content">
+                        <div class="flex justify-between items-center">
+                            <h4 class="text-base sm:text-lg font-medium text-gray-900 pr-4">Can I test multiple microphones?</h4>
+                            <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200 flex-shrink-0" 
+                                 id="faq6-icon" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                    </button>
+                    <div id="faq6-content" class="hidden px-4 sm:px-6 pb-4 sm:pb-6">
+                        <p class="text-gray-600 text-sm sm:text-base">Yes! If you have multiple microphones connected, a device selector dropdown will appear automatically. You can choose which microphone to test from the dropdown menu.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="text-center">
+                <p class="text-gray-600 mb-4">
+                    This microphone test runs entirely in your browser. No audio data is transmitted or stored.
+                </p>
+                <div class="flex justify-center space-x-6">
+                    <a href="/privacy" class="text-gray-500 hover:text-gray-900 transition-colors">Privacy Policy</a>
+                    <span class="text-gray-300">|</span>
+                    <a href="#" class="text-gray-500 hover:text-gray-900 transition-colors">About</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // FAQ Toggle Functionality
+        function toggleFaq(faqId) {
+            const content = document.getElementById(faqId + '-content');
+            const icon = document.getElementById(faqId + '-icon');
+            const button = content.previousElementSibling.querySelector('button');
+            
+            if (content.classList.contains('hidden')) {
+                // Open FAQ
+                content.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+                button.setAttribute('aria-expanded', 'true');
+            } else {
+                // Close FAQ
+                content.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+                button.setAttribute('aria-expanded', 'false');
+            }
+        }
+
+        // Close other FAQs when one is opened (accordion behavior)
+        function toggleFaqAccordion(faqId) {
+            const allFaqs = ['faq1', 'faq2', 'faq3', 'faq4', 'faq5', 'faq6'];
+            
+            allFaqs.forEach(id => {
+                const content = document.getElementById(id + '-content');
+                const icon = document.getElementById(id + '-icon');
+                const button = content.previousElementSibling.querySelector('button');
+                
+                if (id === faqId) {
+                    // Toggle current FAQ
+                    if (content.classList.contains('hidden')) {
+                        content.classList.remove('hidden');
+                        icon.style.transform = 'rotate(180deg)';
+                        button.setAttribute('aria-expanded', 'true');
+                    } else {
+                        content.classList.add('hidden');
+                        icon.style.transform = 'rotate(0deg)';
+                        button.setAttribute('aria-expanded', 'false');
+                    }
+                } else {
+                    // Close other FAQs
+                    content.classList.add('hidden');
+                    icon.style.transform = 'rotate(0deg)';
+                    button.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+
+        // Certificate Generation Function
+        function generateCertificate() {
+            const { jsPDF } = window.jspdf;
+            
+            if (!window.micTestResults) {
+                alert('Please complete a microphone test first before generating a certificate.');
+                return;
+            }
+            
+            const results = window.micTestResults;
+            const doc = new jsPDF('landscape', 'mm', 'a4');
+            
+            // Certificate dimensions
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const pageHeight = doc.internal.pageSize.getHeight();
+            const centerX = pageWidth / 2;
+            
+            // Background and border
+            doc.setFillColor(245, 247, 250); // Light gray background
+            doc.rect(0, 0, pageWidth, pageHeight, 'F');
+            
+            // Main border
+            doc.setDrawColor(59, 130, 246); // Blue border
+            doc.setLineWidth(2);
+            doc.rect(10, 10, pageWidth - 20, pageHeight - 20);
+            
+            // Inner decorative border
+            doc.setDrawColor(156, 163, 175); // Gray border
+            doc.setLineWidth(0.5);
+            doc.rect(15, 15, pageWidth - 30, pageHeight - 30);
+            
+            // Header section
+            doc.setTextColor(59, 130, 246);
+            doc.setFontSize(28);
+            doc.setFont('helvetica', 'bold');
+            doc.text('MICROPHONE TEST CERTIFICATE', centerX, 35, { align: 'center' });
+            
+            // Subheader
+            doc.setTextColor(75, 85, 99);
+            doc.setFontSize(14);
+            doc.setFont('helvetica', 'normal');
+            doc.text('Official Certificate of Microphone Functionality', centerX, 45, { align: 'center' });
+            
+            // Decorative line
+            doc.setDrawColor(59, 130, 246);
+            doc.setLineWidth(1);
+            doc.line(centerX - 60, 50, centerX + 60, 50);
+            
+            // Certificate body
+            doc.setTextColor(31, 41, 55);
+            doc.setFontSize(16);
+            doc.setFont('helvetica', 'normal');
+            doc.text('This is to certify that the microphone has been successfully tested and', centerX, 70, { align: 'center' });
+            doc.text('verified to be working properly on:', centerX, 80, { align: 'center' });
+            
+            // Test details box
+            const boxY = 90;
+            const boxHeight = 60;
+            doc.setFillColor(249, 250, 251);
+            doc.setDrawColor(229, 231, 235);
+            doc.rect(40, boxY, pageWidth - 80, boxHeight, 'FD');
+            
+            // Test details
+            doc.setFontSize(12);
+            doc.setFont('helvetica', 'bold');
+            doc.setTextColor(59, 130, 246);
+            
+            const leftCol = 50;
+            const rightCol = centerX + 20;
+            let currentY = boxY + 15;
+            
+            // Left column
+            doc.text('Test Date:', leftCol, currentY);
+            doc.text('Test Duration:', leftCol, currentY + 10);
+            doc.text('Microphone:', leftCol, currentY + 20);
+            doc.text('Test Status:', leftCol, currentY + 30);
+            
+            // Right column values
+            doc.setFont('helvetica', 'normal');
+            doc.setTextColor(31, 41, 55);
+            doc.text(results.testDate.toLocaleString(), rightCol, currentY);
+            doc.text((results.duration / 1000).toFixed(1) + ' seconds', rightCol, currentY + 10);
+            doc.text(results.microphoneLabel, rightCol, currentY + 20);
+            
+            // Status with color
+            doc.setTextColor(34, 197, 94); // Green for PASSED
+            doc.setFont('helvetica', 'bold');
+            doc.text('PASSED ✓', rightCol, currentY + 30);
+            
+            // Certificate ID
+            const certificateId = 'MIC-' + Date.now().toString(36).toUpperCase();
+            doc.setTextColor(107, 114, 128);
+            doc.setFontSize(10);
+            doc.setFont('helvetica', 'normal');
+            doc.text('Certificate ID: ' + certificateId, centerX, 165, { align: 'center' });
+            
+            // Footer
+            doc.setTextColor(75, 85, 99);
+            doc.setFontSize(12);
+            doc.text('Generated by Microphone Test Platform', centerX, 175, { align: 'center' });
+            doc.text('This certificate verifies that your microphone is functioning correctly', centerX, 185, { align: 'center' });
+            
+            // Website URL
+            doc.setTextColor(59, 130, 246);
+            doc.text(window.location.origin, centerX, 195, { align: 'center' });
+            
+            // Add decorative elements
+            // Corner decorations
+            doc.setDrawColor(59, 130, 246);
+            doc.setLineWidth(2);
+            
+            // Top left corner
+            doc.line(20, 20, 35, 20);
+            doc.line(20, 20, 20, 35);
+            
+            // Top right corner
+            doc.line(pageWidth - 35, 20, pageWidth - 20, 20);
+            doc.line(pageWidth - 20, 20, pageWidth - 20, 35);
+            
+            // Bottom left corner
+            doc.line(20, pageHeight - 35, 20, pageHeight - 20);
+            doc.line(20, pageHeight - 20, 35, pageHeight - 20);
+            
+            // Bottom right corner
+            doc.line(pageWidth - 20, pageHeight - 35, pageWidth - 20, pageHeight - 20);
+            doc.line(pageWidth - 35, pageHeight - 20, pageWidth - 20, pageHeight - 20);
+            
+            // Save the PDF
+            const fileName = `microphone-test-certificate-${certificateId}.pdf`;
+            doc.save(fileName);
+            
+            // Show success message
+            const originalText = event.target.innerHTML;
+            event.target.innerHTML = '<svg class="w-4 h-4 inline-block mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>Downloaded!';
+            event.target.style.backgroundColor = '#10b981';
+            
+            setTimeout(() => {
+                event.target.innerHTML = originalText;
+                event.target.style.backgroundColor = '';
+            }, 2000);
+        }
+
+        // Keyboard navigation for FAQ
+        document.addEventListener('keydown', (e) => {
+            if (e.target.closest('#faqContainer button')) {
+                const button = e.target.closest('button');
+                const faqButtons = Array.from(document.querySelectorAll('#faqContainer button'));
+                const currentIndex = faqButtons.indexOf(button);
+                
+                switch (e.key) {
+                    case 'ArrowDown':
+                        e.preventDefault();
+                        const nextIndex = (currentIndex + 1) % faqButtons.length;
+                        faqButtons[nextIndex].focus();
+                        break;
+                    case 'ArrowUp':
+                        e.preventDefault();
+                        const prevIndex = currentIndex === 0 ? faqButtons.length - 1 : currentIndex - 1;
+                        faqButtons[prevIndex].focus();
+                        break;
+                    case 'Home':
+                        e.preventDefault();
+                        faqButtons[0].focus();
+                        break;
+                    case 'End':
+                        e.preventDefault();
+                        faqButtons[faqButtons.length - 1].focus();
+                        break;
+                }
+            }
+        });
+    </script>
+    <script src="/js/visualizer.js"></script>
+    <script src="/js/app.js"></script>
+</body>
+</html>
