@@ -135,7 +135,7 @@ If this project helped you, please consider:
 
 ## 👨‍💻 Author
 
-**Sau152004**
+**Saurabh Yadav**
 - GitHub: [@Sau152004](https://github.com/Sau152004)
 - Project: [Mic Tester](https://github.com/Sau152004/Mic-Tester.git)
 
