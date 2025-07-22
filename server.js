@@ -32,6 +32,17 @@ app.get('/privacy', (req, res) => {
     });
 });
 
+app.get('/faq', (req, res) => {
+    res.render('faq.html', {    
+        title: 'FAQ - Microphone Test'
+    });
+});
+app.get('/about', (req, res) => {
+    res.render('about.html', {
+        title: 'About - Microphone Test'
+    });
+});     
+
 // 404 handler
 app.use((req, res) => {
     res.status(404).render('404.html', {
