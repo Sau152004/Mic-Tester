@@ -175,7 +175,7 @@ A: This tool is great for basic testing, but professional audio work may require
 ---
 
 <div align="center">
-  <p>Made with ❤️ buy Saurabh Yadav</p>
+  <p>Made with ❤️ by Saurabh Yadav</p>
   <p>
     <a href="https://mic-tester.onrender.com">Try it now</a> •
     <a href="https://github.com/Sau152004/Mic-Tester/issues">Report Bug</a> •
